@@ -12,10 +12,10 @@
         .include        "cx16.inc"
 
 _waitvsync:
-        ldx     VIA1::PRA       ; (TIMER is in RAM bank 0)
-        stz     VIA1::PRA
+        ldx     BANK_RAM_SEL    ; (TIMER is in RAM bank 0)
+        stz     BANK_RAM_SEL
         lda     TIMER + 2
 :       cmp     TIMER + 2
         beq     :-              ; Wait for next jiffy
-        stx     VIA1::PRA
+        stx     BANK_RAM_SEL
         rts

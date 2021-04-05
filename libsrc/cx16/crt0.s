@@ -61,11 +61,11 @@ L2:     lda     zpsave,x
         ldx     spsave
         txs                     ; Restore stack pointer
         ldx     ramsave
-        stx     VIA1::PRA       ; Restore former RAM bank
-        lda     VIA1::PRB
+        stx     BANK_RAM_SEL    ; Restore former RAM bank
+        lda     BANK_ROM_SEL
         and     #<~$07
         ora     #$04
-        sta     VIA1::PRB       ; Change back to BASIC ROM
+        sta     BANK_ROM_SEL    ; Change back to BASIC ROM
 
 ; Back to BASIC.
 
@@ -79,16 +79,16 @@ L2:     lda     zpsave,x
 init:
 ; Change from BASIC's ROM to Kernal's ROM.
 
-        lda     VIA1::PRB
+        lda     BANK_ROM_SEL
         and     #<~$07
-        sta     VIA1::PRB
+        sta     BANK_ROM_SEL
 
 ; Change to the second RAM bank.
 
-        lda     VIA1::PRA
+        lda     BANK_RAM_SEL
         sta     ramsave         ; Save the current RAM bank number
         lda     #$01
-        sta     VIA1::PRA
+        sta     BANK_RAM_SEL
 
 .if 0   ; (We don't need to preserve zero-page space for cc65's variables.)
 ; Save the zero-page locations that we need.

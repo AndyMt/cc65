@@ -11,10 +11,10 @@
 
 
 .proc   _kbhit
-        ldy     VIA1::PRA       ; (KEY_COUNT is in RAM bank 0)
-        stz     VIA1::PRA
+        ldy     BANK_RAM_SEL    ; (KEY_COUNT is in RAM bank 0)
+        stz     BANK_RAM_SEL
         lda     KEY_COUNT       ; Get number of characters
-        sty     VIA1::PRA
+        sty     BANK_RAM_SEL
         tax                     ; High byte of return (only its zero/nonzero ...
         rts                     ; ... state matters)
 .endproc
