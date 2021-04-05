@@ -500,9 +500,9 @@ NMIVec          := $0318
 
 ; 65C22
 .struct VIA1                    ; Versatile Interface Adapter
-        .org    $9F60
-  PRB   .byte                   ; ROM bank, IEC  (Port Register B)
-  PRA   .byte                   ; RAM bank  (Port Register A)
+        .org    $9F00
+  PRB   .byte                   ; (Port Register B)
+  PRA   .byte                   ; (Port Register A)
   DDRB  .byte                   ; (Data Direction Register B)
   DDRA  .byte                   ; (Data Direction Register A)
   T1    .word                   ; (Timer 1)
@@ -518,9 +518,9 @@ NMIVec          := $0318
 
 ; 65C22
 .struct VIA2
-        .org    $9F70
-  PRB   .byte                   ; Mouse communication ?
-  PRA   .byte                   ; NES controller communication
+        .org    $9F10
+  PRB   .byte                   
+  PRA   .byte                   
   DDRB  .byte
   DDRA  .byte
   T1    .word
@@ -557,7 +557,10 @@ NMIVec          := $0318
 ; Banked RAM and ROM
 
 KEY_COUNT       := $A00A        ; (bank 0) Number of keys in input buffer
-TIMER           := $A037        ; (bank 0) 60 Hz. timer (3 bytes, big-endian)
+TIMER           := $A041        ; (bank 0) 60 Hz. timer (3 bytes, big-endian)
+
+BANK_RAM_SEL    := $00          ; RAM bank select in ZP
+BANK_ROM_SEL    := $01          ; ROM bank select in ZP
 
 .struct BANK
         .org    $A000

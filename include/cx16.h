@@ -275,8 +275,8 @@ struct __vera {
 #define VERA    (*(volatile struct __vera *)0x9F20)
 
 #include <_6522.h>
-#define VIA1    (*(volatile struct __6522 *)0x9F60)
-#define VIA2    (*(volatile struct __6522 *)0x9F70)
+#define VIA1    (*(volatile struct __6522 *)0x9F00)
+#define VIA2    (*(volatile struct __6522 *)0x9F10)
 
 /* A structure with the x16emu's settings registers */
 struct __emul {
@@ -297,7 +297,8 @@ struct __emul {
 /* An array window into the half Mebibyte or two Mebibytes of banked RAM */
 #define BANK_RAM        ((unsigned char[0x2000])0xA000)
 
-
+#define BANK_RAM_SEL    (*(volatile uint8_t *)0x00)
+#define BANK_ROM_SEL    (*(volatile uint8_t *)0x01)
 
 /* The addresses of the static drivers */
 
